@@ -1,4 +1,4 @@
-import {Signup , Signin} from '../../Event_Backend/controllers/authControllers.js';
+import {Signup , Signin} from '../controllers/authControllers.js';
 import express from 'express';
 import { VarifyToken } from '../utils/Token.js';
 

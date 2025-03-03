@@ -1,4 +1,4 @@
-import { createEvent, getEvent, getEvents, getMyEvents, getOrders, getPopularEvents, getUsersEvents } from "../../Event_Backend/controllers/eventController.js";
+import { createEvent, getEvent, getEvents, getMyEvents, getOrders, getPopularEvents, getUsersEvents } from "../controllers/eventController.js";
 import express from 'express';
 import { VarifyToken } from '../utils/Token.js'
 

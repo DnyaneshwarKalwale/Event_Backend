@@ -1,4 +1,4 @@
-import { createTicket, getTickets, makePayment } from '../../Event_Backend/controllers/ticketController.js';
+import { createTicket, getTickets, makePayment } from '../controllers/ticketController.js';
 import express from 'express';
 import { VarifyToken } from '../utils/Token.js';
 
