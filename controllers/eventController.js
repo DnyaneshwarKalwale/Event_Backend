@@ -98,6 +98,72 @@ export const getEvent = async (req, resp) => {
     }
 };
 
+export const deleteEvent = async (req, resp) => {
+    try {
+        const { eventId } = req.params;
+        const { user } = req;
+        const event = await eventModel.findById(eventId);
+        if (!event) {
+            return ResponseError(resp, "event not found")
+        }
+        if (event.owner.toString() !== user._id.toString()) {
+            return ResponseError(resp, "you dont have permission to delete this event")
+        }
+        await eventModel.findByIdAndDelete(eventId);
+        resp.status(200).json({
+            status: 'success',
+            message: 'event deleted successfully'
+        })
+        } catch (error) {
+            console.log(error)
+            resp.status(400).json({
+            status: 'error',
+            message: 'failed to delete event'
+            })
+        }
+    };
+
+export const editEvent = async (req, resp) => {
+    try {
+        const { eventId } = req.params;
+        const { user } = req;
+        const { name, description, location, date, time, price, image } = req.body;
+
+        const event = await eventModel.findById(eventId);
+        if (!event) {
+            return ResponseError(resp, "Event not found");
+        }
+
+        if (event.owner.toString() !== user._id.toString()) {
+            return ResponseError(resp, "You don't have permission to edit this event");
+        }
+
+        const updatedEvent = {
+            ...event._doc,
+            name,
+            description,
+            location,
+            date,
+            time,
+            price,
+            image,
+        };
+
+        await eventModel.findByIdAndUpdate(eventId, updatedEvent, { new: true });
+        resp.status(200).json({
+            status: 'success',
+            message: 'Event updated successfully',
+        });
+    } catch (error) {
+        console.log(error);
+        resp.status(400).json({
+            status: 'error',
+            message: 'Failed to update event',
+        });
+    }
+};
+                                
+
 
 export const getPopularEvents = async (req, resp) => {
     try {
