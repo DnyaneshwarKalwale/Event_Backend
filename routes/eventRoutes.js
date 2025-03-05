@@ -1,4 +1,4 @@
-import { createEvent, getEvent, getEvents, getMyEvents, getOrders, getPopularEvents, getUsersEvents, deleteEvent } from "../controllers/eventController.js";
+import { createEvent, getEvent, getEvents, getMyEvents, getOrders, getPopularEvents, getUsersEvents, deleteEvent, editEvent } from "../controllers/eventController.js";
 import express from 'express';
 import { VarifyToken } from '../utils/Token.js'
 
@@ -15,6 +15,7 @@ router.get('/get-popular-events', getPopularEvents);
 router.get('/orders/:eventId',VarifyToken , getOrders);
 router.get('/event/:eventId', VarifyToken, getEvent);
 router.delete('/delete-event/:eventId', VarifyToken, deleteEvent);
+router.put('/edit-event/:eventId', VarifyToken, editEvent);
 
 
 export default router;
